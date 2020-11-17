@@ -1,30 +1,41 @@
 <script lang="ts">
-	export let name: string;
+	import Header from "./Header.svelte";
+	import Navigation from "./Navigation.svelte";
+	import Main from "./Main.svelte";
+	import Footer from "./Footer.svelte";
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+	#app {
+		display: grid;
+		grid-template:
+			"header header header" 5rem
+			"nav nav nav" 5rem
+			"main main main" minmax(calc(100vh - 12.5rem), auto)
+			"footer footer footer" 2.5rem /
+			25rem;
 	}
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	:global(#app > header) {
+		grid-area: header;
 	}
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	:global(#app > nav) {
+		grid-area: nav;
+	}
+
+	:global(#app > main) {
+		grid-area: main;
+	}
+
+	:global(#app > footer) {
+		grid-area: footer;
 	}
 </style>
+
+<div id="app">
+	<Header />
+	<Navigation />
+	<Main />
+	<Footer />
+</div>
